@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Root CA - Myanmar Info-Tech Corporation</title>
+<link href="css/default.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="shortcut icon" href="~/images/favicon.ico" type="image/x-icon" /> 
+  
+</head>
+
+<body>
+<div id="container-header">
+	<div id="header">
+		<ul id="nav">
+			<li id="current-page"><a href="index.php">Home</a></li>
+			<li><a href="aboutus.php">About Us</a></li>
+			<li><a href="services.php">Services</a></li>
+			<li><a href="resources.php">Resources</a></li>
+			<li><a href="revocation/">Certificate Revocation List</a></li>
+			<li></li>
+			<li><a href="certificates/">Certificate Repository</a></li>
+		</ul>
+		<img src="images/myanmar-info-tech-root-ca.gif" alt="Myanmar Info-Tech Root CA" />
+	</div>
+</div>
+<div id="container-advert">
+	<div id="advert">
+		<h1>Myanmar Info-Tech Root CA</h1>
+		<p>Secured, Trusted and Proven Information Technology Solutions</p>
+		</div>
+</div>
+
+<div id="container-content"> 
+<div id="container-homepage-links">
+	<div id="root-ca">
+		<h1>Myanmar Info-Tech Root CA </h1>
+		<p>The premier security house and only leading e-security provider in Myanmar to enale new information technology based buinesses.</p>
+		<p> <a href="#">more about us</a></p>
+	</div>	
+	<div id="provide">
+		<h2>What do we provide?</h2>
+		<p>We provide secure services for digitally sign messages and to encrypt and decrypt messges to provide reliable communication between sender and receiver of information.</p>
+	</div>
+	<div id="ca">
+		<img src="images/ca.jpg" alt="Certification Authority" />
+		<h2>Services</h2>
+		<p>Digital Certificates for Certification Authorities operated by Myanmar Info-Tech Root CA</p>
+	</div>
+	<div class="clear">&nbsp;</div>
+</div>
+</div>
+<div class="clear">&nbsp;</div>
+<div id="footer">
+	Copyright © 2010,Myanmar Info-Tech Corp.Ltd. All Rights Reserved.	
+	<%-- <img src="images/myanmar-info-tech-root-ca.gif" class="logo-img" />--%>
+	</div>
+</body>
+</html>

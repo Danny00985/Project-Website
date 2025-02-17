@@ -1,0 +1,57 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CrossTest.aspx.cs" Inherits="CrossTest" %>
+<%@ PreviousPageType VirtualPath="~/DefaultTest.aspx"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Untitled Page</title>
+   
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <table cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <asp:Label ID="lblName" runat="server"  Text="Label" Visible="False"></asp:Label>&nbsp;
+            <asp:Label ID="lblEmail" runat="server" Text="Label" Visible="False"></asp:Label>&nbsp;
+            <asp:Label ID="lblNumber" runat="server" Text="Label" Visible="False"></asp:Label>&nbsp;
+            <asp:Label ID="lblMessage" runat="server" Text="Message" ForeColor="Red"></asp:Label>          
+        </td>
+    </tr>
+    <tr>
+        <td>
+         
+          <asp:DetailsView ID="dvCertificate" runat="server" Height="50px" Width="125px" AutoGenerateRows="False">
+          <Fields>
+                  <asp:BoundField DataField="SEmail" HeaderText="SEmail" SortExpression="SEmail" />
+                  <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                  <asp:BoundField DataField="Cert_Name" HeaderText="Cert_Name" SortExpression="Cert_Name" />
+                  <asp:BoundField DataField="SOrganization" HeaderText="SOrganization" SortExpression="SOrganization" />
+                  <asp:BoundField DataField="SOUnit" HeaderText="SOUnit" SortExpression="SOUnit" />
+                  <asp:BoundField DataField="SCity" HeaderText="SCity" SortExpression="SCity" />
+                  <asp:BoundField DataField="SState" HeaderText="SState" SortExpression="SState" />
+                  <asp:BoundField DataField="SCountry" HeaderText="SCountry" SortExpression="SCountry" />
+                  <asp:BoundField DataField="Serial_Num" HeaderText="Serial_Num" SortExpression="Serial_Num" />
+                  <asp:BoundField DataField="Valid_From" HeaderText="Valid_From" SortExpression="Valid_From" />
+                  <asp:BoundField DataField="Valid_To" HeaderText="Valid_To" SortExpression="Valid_To" />
+                  <asp:BoundField DataField="ThumbPrint" HeaderText="ThumbPrint" SortExpression="ThumbPrint" />
+                  <asp:BoundField DataField="Issuer" HeaderText="Issuer" SortExpression="Issuer" />
+                  <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+              </Fields>
+          </asp:DetailsView>
+          </td>
+          <%--<asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="SelectList"
+              TypeName="RootCA.BusinessLogic.RootController"></asp:ObjectDataSource>--%>
+          </tr> 
+          <tr>
+          <td>
+        <asp:Button ID="butDownload" runat="server" Text="Download" />
+        </td>
+      </tr>
+</table>
+    </div>
+    </form>
+</body>
+</html>

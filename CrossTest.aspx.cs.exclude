@@ -1,0 +1,123 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+
+public partial class CrossTest : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+         lblMessage.Visible = false;
+        if ((PreviousPage != null) )
+        {
+            DefaultTest prevPage = PreviousPage;
+            // we can now use the values from textboxes and display them in two Label controls..
+            lblName.Text = prevPage.CommonName;
+
+            //lblEmail.Text = prevPage.Email;
+
+            //lblNumber.Text = prevPage.SerialNo;
+
+        }
+        Response.Write(PreviousPage.CommonName);
+        if (lblName.Text != "")
+        {
+            dvCertificate_DataBindByName();
+        }
+        else if (lblEmail.Text != "")
+        {
+            dvCertificate_DataBindByEmail();
+        }
+        else
+        {
+            dvCertificate_DataBindBySerialNo();
+        }
+    }
+
+    private void dvCertificate_DataBindBySerialNo()
+    {
+        try
+        {
+            if (lblNumber.Text == "")
+            {
+                dvCertificate.Visible = false;
+            }
+            else
+            {
+
+            }
+        }
+        catch (Exception ex)
+        {
+            dvCertificate.Visible = false;
+            lblMessage.Visible = true;
+            lblMessage.Text = ex.Message;
+            return;
+        }
+    }
+
+    private void dvCertificate_DataBindByEmail()
+    {
+        try
+        {
+            if (lblEmail.Text == "")
+            {
+                dvCertificate.Visible = false;
+            }
+            else
+            {
+                RootController controller = new RootController();
+                System.Collections.Generic.List<RootInfo> rootlist = new System.Collections.Generic.List<RootInfo>();
+                rootlist.Add(controller.SelectByEmail(lblName.Text));
+                dvCertificate.DataSource = rootlist;
+                dvCertificate.Visible = true;
+                dvCertificate.DataSource = rootlist;
+                dvCertificate.DataBind();
+            }
+        }
+        catch (Exception ex)
+        {
+            dvCertificate.Visible = false;
+            lblMessage.Visible = true;
+            lblMessage.Text = ex.Message;
+            return;
+        }
+    }
+
+    private void dvCertificate_DataBindByName()
+    {
+        try
+        {
+            if (lblName.Text == "")
+            {
+                dvCertificate.Visible = false;
+            }
+            else
+            {
+                RootController controller = new RootController();
+                System.Collections.Generic.List<RootInfo> rootlist = new System.Collections.Generic.List<RootInfo>();
+                rootlist.Add(controller.SelectByCert_Name(lblName.Text));
+                dvCertificate.DataSource = rootlist;
+                dvCertificate.Visible = true;
+                dvCertificate.DataSource = rootlist;
+                dvCertificate.DataBind();
+
+            }
+        }
+        catch (Exception ex)
+        {
+            dvCertificate.Visible = false;
+            lblMessage.Visible = true;
+            lblMessage.Text = ex.Message;
+            return;
+        }
+   
+    }
+}
