@@ -1,0 +1,135 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using RootCA.BusinessLogic;
+
+public partial class Search : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        this.Title = "Myanmar Root CA Certifying Authorities"; 
+        Label1.Visible = false;
+        Label3.Text = null;
+    }
+    
+    void gvcer_DataBind()
+    {
+        string message = "";
+
+        try
+        {
+            //SearchController controller = new SearchController();
+            if (txtSearchcer.Text == "")
+            { message = "";
+            gvcer.Visible = false;
+            }
+
+            else
+            {
+                SearchController controller = new SearchController();
+                gvcer.DataSource = controller.Searchbyid(txtSearchcer.Text);
+                gvcer.Visible = true;
+                gvcer.DataBind();
+            }
+           
+
+        }
+        catch (Exception ex)
+        {
+            gvcer.Visible = false;
+            Label1.Visible = true;
+            Label1.Text = ex.Message;
+            return;
+        }
+
+        //Utilities.RedirectMessagePage(message, "~/Search.aspx");
+    }
+
+    protected void gvcer_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvcer.PageIndex = e.NewPageIndex;
+        gvcer_DataBind();
+    }
+    protected void btnSearchemail_Click(object sender, EventArgs e)
+    {
+        gvcer.Dispose();
+        if (Page.IsValid)
+        {
+            gvemailsearch_DataBind();
+        }
+    }
+
+    void gvemailsearch_DataBind()
+    {       
+
+        try
+        {
+            //SearchController controller = new SearchController();
+            if (txtEmail.Text == "")
+            {                
+                gvsearchemail.Visible = false;
+            }
+
+
+            else
+            {
+               SearchController controller=new SearchController();
+               gvsearchemail.DataSource = controller.SelectEmail(txtEmail.Text);
+               gvsearchemail.Visible = true;
+               gvsearchemail.DataBind();
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+            gvsearchemail.Visible = false;
+            Label3.Visible = true;
+            Label3.Text = ex.Message;
+            return;            
+        }
+    }
+
+
+    protected void gvsearchemail_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvsearchemail.PageIndex = e.NewPageIndex;
+        gvemailsearch_DataBind();
+    }
+    protected void ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        RegexStringValidator r = new RegexStringValidator(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+
+        try
+        {
+
+            r.Validate(args.Value);
+
+            args.IsValid = true;
+
+        }
+
+        catch (ArgumentException ee)
+        {
+
+            Label3.Text = "Doesn't seem to be valid email id";
+            //"Error occured: Doesn't seem to be valid email id. <br />" +
+
+            //ee.Message.ToString();
+
+            args.IsValid = false;
+
+        } 
+    }
+    protected void btnSearchcer_Click(object sender, EventArgs e)
+    {       
+        gvcer_DataBind();
+    }
+}

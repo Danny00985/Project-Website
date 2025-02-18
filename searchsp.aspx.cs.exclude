@@ -1,0 +1,83 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using RootCA.BusinessLogic;
+
+public partial class searchsp : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        this.Title = "Myanmar Root CA Certifying Authorities"; 
+    }
+    void gvcer_DataBind()
+    {
+        string message = "";
+
+        try
+        {
+            //SearchController controller = new SearchController();
+            if (txtsearch.Text == "")
+            {
+                message = "";
+                gvcer.Visible = false;
+            }
+
+
+            else
+            {
+                SearchController controller = new SearchController();
+                gvcer.DataSource = controller.Searchbyid(txtsearch.Text);
+                //gvcer.Visible = true;
+                gvcer.DataBind();
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+            gvcer.Visible = false;
+            Label1.Visible = true;
+            Label1.Text = ex.Message;
+            return;
+        }
+
+        //Utilities.RedirectMessagePage(message, "~/Search.aspx");
+    }
+
+    protected void gvcer_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvcer.PageIndex = e.NewPageIndex;
+        gvcer_DataBind();
+    }
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        if (CheckBoxList1.Items[0].Selected)
+        {
+            gvcer_DataBind(); 
+        }
+        else if (CheckBoxList1.Items[1].Selected)
+        {
+            gvcer_DataBind(); 
+        }
+        else if ((CheckBoxList1.Items[0].Selected) && (CheckBoxList1.Items[1].Selected))
+        {
+            gvcer_DataBind(); 
+        }
+        else
+        {
+            gvcer_DataBind();
+        }
+        
+    }
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtsearch.Text = null;
+    }
+}

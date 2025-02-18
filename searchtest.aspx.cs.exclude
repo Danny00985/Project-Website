@@ -1,0 +1,52 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+public partial class searchtest : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        this.Title = "My Test";
+        GridView1.DataBind();
+    }
+    # region comment
+    //protected void ObjectDataSource1_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+    //{
+    //    string criteria = UIHelper.ReplaceSingleQuote(TextBox1.Text);
+
+    //    if (string.IsNullOrEmpty(criteria))
+    //        return;
+
+    //    //string[] FieldNames = { "[FlatForm].[TextData]", "[FlatForm].[TextDataOptional]", "[FlatForm].[LongTextData]", "[FlatForm].[LongTextDataOptional]" };
+    //    string[] FieldNames = { "[tblcert].[Cert_Name]", "[tblcert].[Serial_Num]" };
+
+    //    if (RadioButtonList1.SelectedIndex == 0)
+    //        e.InputParameters["searchExpression"] = FieldNames[DropDownList1.SelectedIndex] + "='" + criteria + "'";
+    //    else
+    //        e.InputParameters["searchExpression"] = FieldNames[DropDownList1.SelectedIndex] + "LIKE '%" + criteria + "%'";
+
+    //}
+    #endregion
+    protected void odsFlatForm_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+    {
+        string criteria = UIHelper.ReplaceSingleQuote(TextBox1.Text);
+
+        if (string.IsNullOrEmpty(criteria))
+            return;
+
+        //string[] FieldNames = { "[FlatForm].[TextData]", "[FlatForm].[TextDataOptional]", "[FlatForm].[LongTextData]", "[FlatForm].[LongTextDataOptional]" };
+        string[] FieldNames = { "[tblcert].[Cert_Name]", "[tblcert].[Serial_Num]" };
+
+        if (RadioButtonList1.SelectedIndex == 0)
+            e.InputParameters["searchExpression"] = FieldNames[DropDownList1.SelectedIndex] + "='" + criteria + "'";
+        else
+            e.InputParameters["searchExpression"] = FieldNames[DropDownList1.SelectedIndex] + "LIKE '%" + criteria + "%'";
+    }
+}

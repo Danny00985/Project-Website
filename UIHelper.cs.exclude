@@ -1,0 +1,125 @@
+using System;
+using System.Web;
+using System.Resources;
+//using ACE.CondoManagement.DataAccess;
+//using ACE.CondoManagement.BusinessLogic;
+/// <summary>
+/// Summary description for Utilities
+/// </summary>
+public class UIHelper
+{
+    public const string SAVE_SUCCESS = "SAVE_SUCCESS";
+    public const string UPDATE_SUCCESS = "UPDATE_SUCCESS";
+    public const string DELETE_SUCCESS = "DELETE_SUCCESS";
+    public const string SELECT_ONE = "SELECT_ONE";
+    public const string CUSTOM_URL = "Custom_URL";
+    public const string DATA_USING = "Record is using.Can not delete.";    
+    public const string REQUIRE_PROGRAMPATH = "Require Program Path.";
+    public const string Duplicate = "Duplicate";
+    public const string DATE_ERROR = "DATE_ERROR";
+    public const string COMPAREDATE_ERROR = "COMPAREDATE_ERROR";
+    public const string NO_DATA = "NO_DATA";
+    public const string POSTING_SUCCESS = "POSTING_SUCCESS";
+    public const string PLEASE_CHOICE_ANOTHER_SPNO = "PLEASE_CHOICE_ANOTHER_SPNO";
+    public const string PLEASE_ADD_ITEM_DATA = "PLEASE_ADD_ITEM_DATA";
+    public const string PLEASE_SELECT_CHECKBOX_TOSAVE = "PLEASE_SELECT_CHECKBOX_TOSAVE";
+
+    
+
+    public static void RedirectMessagePage(string message, string redirectUrl)
+    {
+        message = HttpContext.Current.Server.UrlEncode(message);
+        redirectUrl = HttpContext.Current.Server.UrlEncode(redirectUrl);
+
+        HttpContext.Current.Response.Redirect("~/ShowMessage.aspx?Message=" + message + "&RedirectUrl=" + redirectUrl);
+    }
+
+    public static string GetErrorMessage(string errorCode)
+    {
+        string errorDescription = Resources.Resource.ResourceManager.GetString(errorCode);
+        if (string.IsNullOrEmpty(errorDescription))
+            return errorCode;
+
+        return Resources.Resource.ResourceManager.GetString(errorCode);
+    }
+
+    public static decimal GetDecimal(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return decimal.MinValue;
+
+        return decimal.Parse(value.Replace(",", ""));
+    }
+
+    public static int GetInt32(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return int.MinValue;
+
+        return int.Parse(value.Replace(",",""));
+    }
+
+    public static DateTime GetDateTime(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return DateTime.MinValue;
+
+        return DateTime.ParseExact(value, Configuration.UIDateFormat, null);
+    }
+
+    public static DateTime GetTime(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return DateTime.MinValue;
+
+        return DateTime.ParseExact(value, Configuration.UITimeFormat, null);
+    }
+
+    public static string GetDecimalText(decimal value)
+    {
+        if (value == decimal.MinValue) return string.Empty;
+
+        string restult = decimal.Round(value, 2).ToString();
+
+        if (restult.IndexOf(".") == -1)
+            restult += ".00";
+        return restult;
+    }
+
+    public static string GetInt32Text(int value)
+    {
+        if (value == int.MinValue) return string.Empty;
+
+        return value.ToString();
+    }
+
+    public static string GetDateTimeText(DateTime value)
+    {
+        if (value == DateTime.MinValue) return string.Empty;
+
+        return value.ToString(Configuration.UIDateFormat);
+    }
+
+    public static string GetTimeText(DateTime value)
+    {
+        if (value == DateTime.MinValue) return string.Empty;
+
+        return value.ToString(Configuration.UITimeFormat);
+    }
+
+    public static void InsertSelectOne(System.Web.UI.WebControls.DropDownList ddl)
+    {
+        ddl.Items.Insert(0,new System.Web.UI.WebControls.ListItem(Resources.Resource.ResourceManager.GetString(SELECT_ONE),""));
+    }
+
+    public static void InsertCustomURL(System.Web.UI.WebControls.DropDownList ddl)
+    {
+        ddl.Items.Insert(0, new System.Web.UI.WebControls.ListItem(Resources.Resource.ResourceManager.GetString(CUSTOM_URL), ""));
+    }
+
+    public static string ReplaceSingleQuote(string value)
+    {
+        return value.Replace("'", "''");
+    }
+
+}

@@ -1,0 +1,92 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="searchsp.aspx.cs" Inherits="searchsp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Untitled Page</title>
+     <link rel="shortcut icon" href="~/images/final.png" type="image/x-icon" /> 
+</head>
+<body>
+    <form id="form1" runat="server">
+  <div id="container-content">
+        <table>
+            <tr>
+                <td style="width: 197px">
+                    <asp:Label ID="Label1" runat="server" Text="Search :" style="left: 163px; position: relative; top: 0px"></asp:Label></td>
+                <td style="width: 107px">
+                    <asp:TextBox ID="txtsearch" runat="server"></asp:TextBox></td>
+                <td style="width: 20px">
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtsearch"
+                        ErrorMessage="Please Fill Search Sting !" Width="20px">*</asp:RequiredFieldValidator></td>
+            </tr>
+            <tr>
+                <td style="width: 197px">
+                    <asp:CheckBoxList ID="CheckBoxList1" runat="server" Width="220px">
+                        <asp:ListItem>including revoked certificate</asp:ListItem>
+                        <asp:ListItem>including expired certificate</asp:ListItem>
+                    </asp:CheckBoxList></td>
+                <td style="width: 107px">
+                </td>
+                <td style="width: 20px">
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 197px">
+                </td>
+                <td style="width: 107px">
+                    <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Search" Width="50px" />
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" Width="45px" /></td>
+                <td style="width: 20px">
+                </td>
+            </tr>
+        </table>
+    
+  
+        <asp:GridView ID="gvcer" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+            CellPadding="4" ForeColor="#333333" GridLines="None" Height="300px" OnPageIndexChanging="gvcer_PageIndexChanging"
+            Style="position: relative" Width="920px">
+            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" Font-Names="Tahoma" ForeColor="White" />
+            <Columns>
+                <asp:BoundField DataField="Cert_Name" HeaderText="Certificate Name" SortExpression="Cert_Name">
+                    <HeaderStyle BackColor="Gainsboro" Font-Bold="True" ForeColor="Black" HorizontalAlign="Center" />
+                    <FooterStyle BackColor="Gainsboro" />
+                    <ItemStyle HorizontalAlign="Justify" VerticalAlign="Bottom" />
+                </asp:BoundField>
+                <asp:BoundField DataField="Serial_Num" HeaderText="Serial Number" SortExpression="Serial_Num">
+                    <HeaderStyle BackColor="Gainsboro" Font-Bold="True" ForeColor="Black" HorizontalAlign="Center" />
+                    <FooterStyle BackColor="Gainsboro" />
+                    <ItemStyle Width="150px" />
+                </asp:BoundField>
+                <asp:BoundField DataField="SOrganization" HeaderText="SOrganization" SortExpression="SOrganization">
+                    <HeaderStyle BackColor="Gainsboro" Font-Bold="True" ForeColor="Black" HorizontalAlign="Center" />
+                    <FooterStyle BackColor="Gainsboro" />
+                </asp:BoundField>
+                <asp:BoundField DataField="SOUnit" HeaderText="SO Unit" SortExpression="SOUnit">
+                    <HeaderStyle BackColor="Gainsboro" Font-Bold="True" ForeColor="Black" HorizontalAlign="Center" />
+                    <FooterStyle BackColor="Gainsboro" />
+                </asp:BoundField>
+                <asp:HyperLinkField DataNavigateUrlFields="Cert_Name" DataNavigateUrlFormatString="./validcertificatesdetail.aspx?ID={0}"
+                    SortExpression="Cert_Name" Text="Detail">
+                    <HeaderStyle BackColor="Gainsboro" Font-Bold="True" ForeColor="DarkGreen" />
+                    <FooterStyle BackColor="Gainsboro" />
+                </asp:HyperLinkField>
+            </Columns>
+            <RowStyle BackColor="#F7F6F3" Font-Names="Tahoma" Font-Size="Smaller" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+            <PagerStyle BackColor="Gainsboro" Font-Bold="True" Font-Names="Tahoma" Font-Size="Small"
+                ForeColor="Black" HorizontalAlign="Center" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" Font-Names="Tahoma" Font-Size="Small"
+                ForeColor="White" />
+            <EditRowStyle BackColor="#999999" VerticalAlign="Middle" />
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        </asp:GridView>
+          </div>
+          
+          <div id="footer">
+	Copyright © 2010,Myanmar Info-Tech Corp.Ltd. All Rights Reserved.
+	<%-- <img src="images/myanmar-info-tech-root-ca.gif" class="logo-img" />--%>
+		</div>
+    </form>
+</body>
+</html>

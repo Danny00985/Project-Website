@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Companies>
+  <company
+   Name="Microsoft"
+   Founder="Bill Gates"
+   Location="Redmond,Washington" />
+  <company
+    Name ="SUN"
+    Founder="Vinod Khosla"
+    Location="Santa Clara,California" />
+  <company
+    Name="IBM"
+    Founder="Tom Watson"
+    Location="Armank,New York" />
+  <company
+    Name ="Google"
+    Founder="Larry Page"
+    Location="Mountain View,California" />
+</Companies>
